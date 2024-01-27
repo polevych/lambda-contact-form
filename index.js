@@ -4,7 +4,7 @@ const { google } = require("googleapis");
 const SPREADSHEET_ID = process.env.SPREADSHEET_ID;
 const TABLE_NAME = process.env.TABLE_NAME;
 
-// You have to base64 encode(https://www.base64encode.org) the entire service account JSON and store it in an environment variable.
+// You have to base64 encode(https://www.base64encode.org) the entire service account JSON and store it in an environment variable
 const base64EncodedServiceAccount = process.env.BASE64_ENCODED_SERVICE_ACCOUNT;
 const decodedServiceAccount = Buffer.from(base64EncodedServiceAccount, "base64").toString("utf-8");
 const credentials = JSON.parse(decodedServiceAccount);
@@ -56,7 +56,7 @@ exports.handler = async (event, _) => {
     const nextRowIndex = await getNextRowIndex(sheetsAPI);
 
     // Prepare the new row data
-    const newRowData = [name, email, description, "FALSE"]; // 'No' for the 'reviewed' column
+    const newRowData = [name, email, description, "FALSE"]; // 'FALSE' for the 'reviewed' column, so you know the lead has not yet been processed
 
     // Append the new row to the sheet
     await appendRowToSheet(sheetsAPI, nextRowIndex, newRowData);
